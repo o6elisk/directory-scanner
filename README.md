@@ -21,7 +21,7 @@ A Python tool that automatically generates and maintains a live directory struct
 
 1. Clone the repository to your project's root directory (the directory you want scanned).
 ```bash
-git clone https://github.com/obelisk/directory-scanner.git
+git clone https://github.com/o6elisk/directory-scanner.git
 ```
 
 2. Navigate into the directory and run the installation script:
