@@ -134,7 +134,8 @@ FILE_ICONS = {
 class DirectoryScanner:
     def __init__(self):
         self.config = self.load_config()
-        self.root_dir = self.find_root_directory()
+        # Set the root directory to the parent of the directory-scanner folder
+        self.root_dir = Path(__file__).resolve().parent.parent
         self.ignore_patterns = self.config['ignore_patterns']
         self.output_file = self.config['output_file']
         self.use_emojis = str(self.config.get('use_emojis', 'true')).lower() == 'true'
@@ -144,15 +145,6 @@ class DirectoryScanner:
         """Load configuration from config.yaml."""
         with open('config.yaml', 'r') as f:
             return yaml.safe_load(f)
-
-    def find_root_directory(self):
-        """Find the root directory by looking for common project markers."""
-        current = Path.cwd()
-        while current != current.parent:
-            if any((current / marker).exists() for marker in ['.git', 'package.json', 'setup.py']):
-                return current
-            current = current.parent
-        return Path.cwd()
 
     def should_ignore(self, path):
         """Enhanced ignore pattern checking."""
